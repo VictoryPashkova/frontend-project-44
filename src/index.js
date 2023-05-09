@@ -14,7 +14,7 @@ const theGame = (gameName, name) => {
       if (gameName === 'calc') {
         const operatorArr = ['+', '-', '*']
         let randomOperatop = _.sample(operatorArr);
-        question = `${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
+        question = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
         
         switch(randomOperatop) {
             case '+':
