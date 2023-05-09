@@ -33,7 +33,7 @@ const theGame = (gameName, name) => {
             }
 
       } else if (gameName === 'gcd') {
-        question = `${randomNumberOne} ${randomNumberTwo}`;
+        question = `Question: ${randomNumberOne} ${randomNumberTwo}`;
           while (randomNumberOne !== 0 && randomNumberTwo !== 0) {
             if (randomNumberOne > randomNumberTwo) {
                 randomNumberOne = randomNumberOne % randomNumberTwo;
@@ -59,7 +59,7 @@ const theGame = (gameName, name) => {
         hiddenNumber = arrProg[randomIndex];
         arrProg[randomIndex] = '..';
       
-        question = arrProg.join(' ');
+        question = 'Question:' + arrProg.join(' ');
         correctAnswer = String(hiddenNumber);
 
       } else if (gameName === 'prime') {
