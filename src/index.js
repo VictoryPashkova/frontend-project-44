@@ -42,13 +42,13 @@ const theGame = (gameName, name) => {
       }
     } else if (gameName === 'progression') {
       const arrProg = [];
-      const randomLength = Math.floor(Math.random() * (10 - 6)) + 6;
+      const randomLength = Math.floor(Math.random() * (10 - 5)) + 5;
       const randomIndex = Math.floor(Math.random() * ((randomLength - 1) - 0)) + 0;
       const randomStep = Math.floor(Math.random() * (10 - 2)) + 2;
       let randomFirstNumber = Math.floor(Math.random() * (10 - 1)) + 1;
       let hiddenNumber = 0;
 
-      for (let n = 0; i < randomLength; n += 1) {
+      for (let k = 0; k < randomLength; k += 1) {
         randomFirstNumber += randomStep;
         arrProg.push(randomFirstNumber);
       }
@@ -61,7 +61,7 @@ const theGame = (gameName, name) => {
     } else if (gameName === 'prime') {
       questionUser = `Question: ${randomNumberOne}`;
 
-      for (let j = 2; i < randomNumberOne; j += 1) {
+      for (let j = 2; j < randomNumberOne; j += 1) {
         if (randomNumberOne % i === 0) {
           correctAnswer = 'no';
           break;
