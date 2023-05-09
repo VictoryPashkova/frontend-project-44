@@ -1,9 +1,9 @@
-import readlineSync, { question } from 'readline-sync';
+import readlineSync from 'readline-sync';
 import _ from 'lodash';
 
 const theGame = (gameName, name) => {
   let theEnd = '';
-  let question = '';
+  let questionUser = '';
   let correctAnswer = '';
   let wrongAnswerText = '';
 
@@ -14,7 +14,7 @@ const theGame = (gameName, name) => {
     if (gameName === 'calc') {
       const operatorArr = ['+', '-', '*'];
       const randomOperatop = _.sample(operatorArr);
-      question = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
+      questionUser = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
 
       if (randomOperatop === '+') {
         correctAnswer = String(randomNumberOne + randomNumberTwo);
@@ -24,14 +24,14 @@ const theGame = (gameName, name) => {
         correctAnswer = String(randomNumberOne * randomNumberTwo);
       }
     } else if (gameName === 'even') {
-      question = `Question: ${randomNumberOne}`;
+      questionUser = `Question: ${randomNumberOne}`;
       if (randomNumberOne % 2 === 0) {
         correctAnswer = 'yes';
       } else if (randomNumberOne % 2 !== 0) {
         correctAnswer = 'no';
       }
     } else if (gameName === 'gcd') {
-      question = `Question: ${randomNumberOne} ${randomNumberTwo}`;
+      questionUser = `Question: ${randomNumberOne} ${randomNumberTwo}`;
       while (randomNumberOne !== 0 && randomNumberTwo !== 0) {
         if (randomNumberOne > randomNumberTwo) {
           randomNumberOne %= randomNumberTwo;
@@ -48,7 +48,7 @@ const theGame = (gameName, name) => {
       let randomFirstNumber = Math.floor(Math.random() * (10 - 1)) + 1;
       let hiddenNumber = 0;
 
-      for (let i = 0; i < randomLength; i += 1) {
+      for (let n = 0; i < randomLength; n += 1) {
         randomFirstNumber += randomStep;
         arrProg.push(randomFirstNumber);
       }
@@ -56,31 +56,27 @@ const theGame = (gameName, name) => {
       hiddenNumber = arrProg[randomIndex];
       arrProg[randomIndex] = '..';
 
-      question = `Question: ${arrProg.join(' ')}`;
+      questionUser = `Question: ${arrProg.join(' ')}`;
       correctAnswer = String(hiddenNumber);
     } else if (gameName === 'prime') {
-      question = `Question: ${randomNumberOne}`;
-      let value = false;
+      questionUser = `Question: ${randomNumberOne}`;
 
-      for (let i = 2; i < randomNumberOne; i += 1) {
+      for (let j = 2; i < randomNumberOne; j += 1) {
         if (randomNumberOne % i === 0) {
-          value = false;
           correctAnswer = 'no';
           break;
         } else {
-          value = true;
           correctAnswer = 'yes';
         }
       }
     }
 
-    console.log(question);
+    console.log(questionUser);
     const userAnswer = readlineSync.question('Your answer: ');
 
     if (userAnswer === correctAnswer) {
       console.log('Correct!');
       theEnd = `Congratulations, ${name}!`;
-      continue;
     } else {
       wrongAnswerText = `'${userAnswer}' is wrong answer. Correct answer was '${correctAnswer}'`;
       console.log(wrongAnswerText);
@@ -107,6 +103,9 @@ const gamesNameRules = (gameName) => {
       break;
     case 'prime':
       console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
+      break;
+    default:
+      console.log('No game');
   }
 };
 

@@ -1,5 +1,4 @@
 import readlineSync from 'readline-sync';
-import _ from 'lodash';
 import { gamesNameRules, theGame } from './index.js';
 
 const prime = () => {
