@@ -1,14 +1,13 @@
 import readlineSync from 'readline-sync';
-import { gamesNameRules, theGame } from './index.js';
+import { gamesNameRules, theGame } from '../index.js';
 
-const isEvenNumber = () => {
+const prime = () => {
   console.log('Welcome to the Brain Games!');
   const name = readlineSync.question('May I have your name?: ');
   console.log(`Hello, ${name}!`);
 
-  gamesNameRules('even');
-
-  theGame('even', name);
+  gamesNameRules('prime');
+  theGame('prime', name);
 };
 
-export default isEvenNumber;
+export default prime;
