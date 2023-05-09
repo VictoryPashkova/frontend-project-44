@@ -45,7 +45,7 @@ const theGame = (gameName, name) => {
 
       } else if (gameName === 'progression') {
         const arrProg = [];
-        let randomLength = Math.floor(Math.random() * (10 - 4)) + 4;
+        let randomLength = Math.floor(Math.random() * (10 - 6)) + 6;
         let randomIndex = Math.floor(Math.random() * ((randomLength - 1) - 0)) + 0;
         let randomStep = Math.floor(Math.random() * (10 - 2)) + 2;
         let randomFirstNumber = Math.floor(Math.random() * (10 - 1)) + 1;
@@ -59,7 +59,7 @@ const theGame = (gameName, name) => {
         hiddenNumber = arrProg[randomIndex];
         arrProg[randomIndex] = '..';
       
-        question = 'Question:' + arrProg.join(' ');
+        question = 'Question: ' + arrProg.join(' ');
         correctAnswer = String(hiddenNumber);
 
       } else if (gameName === 'prime') {
