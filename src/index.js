@@ -1,4 +1,4 @@
-import readlineSync from 'readline-sync';
+import readlineSync, { question } from 'readline-sync';
 import _ from "lodash";
 
 const theGame = (gameName, name) => {
@@ -6,7 +6,6 @@ const theGame = (gameName, name) => {
     let question = '';
     let correctAnswer = '';
     let wrongAnswerText = '';
-
 
     for (let i = 1; i <= 3; i += 1) {
       let randomNumberOne = Math.floor(Math.random() * (50 - 15)) + 15;
@@ -17,13 +16,15 @@ const theGame = (gameName, name) => {
         let randomOperatop = _.sample(operatorArr);
         question = randomNumberOne + randomOperatop + randomNumberTwo;
         
-        if (randomOperatop === '+') {
-          correctAnswer = String(randomNumberOne + randomNumberTwo);
-      } else if (randomOperatop === '-') {
-          correctAnswer = String(randomNumberOne - randomNumberTwo);
-      } else if (randomOperatop === '*') {
-          correctAnswer = String(randomNumberOne * randomNumberTwo);
-      }
+        switch(randomOperatop) {
+            case '+':
+                correctAnswer = String(randomNumberOne + randomNumberTwo);
+            case '-':
+                correctAnswer = String(randomNumberOne - randomNumberTwo);
+            case '*':
+                correctAnswer = String(randomNumberOne * randomNumberTwo);
+        }
+        
       } else if (gameName === 'even') {
         question = `Question: ${randomNumberOne}`;
             if (randomNumberOne % 2 === 0) {
@@ -31,6 +32,7 @@ const theGame = (gameName, name) => {
             } else if (randomNumberOne % 2 !== 0) {
             correctAnswer = 'no';
             }
+
       } else if (gameName === 'gcd') {
         question = `${randomNumberOne} ${randomNumberTwo}`;
           while (randomNumberOne !== 0 && randomNumberTwo !== 0) {
@@ -41,9 +43,43 @@ const theGame = (gameName, name) => {
             }
             correctAnswer = String(randomNumberOne + randomNumberTwo); 
           }
+
+      } else if (gameName === 'progression') {
+        const arrProg = [];
+        let randomLength = Math.floor(Math.random() * (10 - 4)) + 4;
+        let randomIndex = Math.floor(Math.random() * ((randomLength - 1) - 0)) + 0;
+        let randomStep = Math.floor(Math.random() * (10 - 2)) + 2;
+        let randomFirstNumber = Math.floor(Math.random() * (10 - 1)) + 1;
+        let hiddenNumber = 0;
+      
+        for (let i = 0; i < randomLength; i += 1) {
+          randomFirstNumber = randomFirstNumber + randomStep;
+          arrProg.push(randomFirstNumber);
+        }
+        
+        hiddenNumber = arrProg[randomIndex];
+        arrProg[randomIndex] = '..';
+      
+        question = arrProg.join(' ');
+        correctAnswer = String(hiddenNumber);
+        
+      } else if (gameName === 'prime') {
+        question = randomNumberOne;
+        let value = false;
+
+        for (let i = 2; i < randomNumberOne; i += 1) {
+            if (randomNumberOne % i === 0) {
+                value = false;
+                correctAnswer = 'no';
+                break;
+            } else {
+                value = true;
+                correctAnswer = 'yes';
+            }
+        }
       }
 
-      console.log(question); 
+      console.log(question);
       const userAnswer = readlineSync.question('Your answer: ');
 
       if (userAnswer === correctAnswer) {
@@ -71,6 +107,13 @@ const gamesNameRules = (gameName) => {
             break;
         case 'gcd':
             console.log('Find the greatest common divisor of given numbers.');
+            break;
+        case 'progression':
+            console.log('What number is missing in the progression?');
+            break;
+        case 'prime':
+            console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
+
     }
 
 };
