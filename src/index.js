@@ -14,7 +14,7 @@ const theGame = (gameName, name) => {
       if (gameName === 'calc') {
         const operatorArr = ['+', '-', '*']
         let randomOperatop = _.sample(operatorArr);
-        question = randomNumberOne + randomOperatop + randomNumberTwo;
+        question = `${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
         
         switch(randomOperatop) {
             case '+':
@@ -62,7 +62,7 @@ const theGame = (gameName, name) => {
       
         question = arrProg.join(' ');
         correctAnswer = String(hiddenNumber);
-        
+
       } else if (gameName === 'prime') {
         question = randomNumberOne;
         let value = false;
