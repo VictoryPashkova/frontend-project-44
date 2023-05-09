@@ -16,13 +16,12 @@ const theGame = (gameName, name) => {
         let randomOperatop = _.sample(operatorArr);
         question = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
         
-        switch(randomOperatop) {
-            case '+':
-                correctAnswer = String(randomNumberOne + randomNumberTwo);
-            case '-':
-                correctAnswer = String(randomNumberOne - randomNumberTwo);
-            case '*':
-                correctAnswer = String(randomNumberOne * randomNumberTwo);
+        if (randomOperatop === '+') {
+            correctAnswer = String(randomNumberOne + randomNumberTwo);
+        } else if (randomOperatop === '-') {
+            correctAnswer = String(randomNumberOne - randomNumberTwo);
+        } else if (randomOperatop === '*') {
+            correctAnswer = String(randomNumberOne * randomNumberTwo);
         }
         
       } else if (gameName === 'even') {
