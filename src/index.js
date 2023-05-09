@@ -62,7 +62,7 @@ const theGame = (gameName, name) => {
       questionUser = `Question: ${randomNumberOne}`;
 
       for (let j = 2; j < randomNumberOne; j += 1) {
-        if (randomNumberOne % i === 0) {
+        if (randomNumberOne % j === 0) {
           correctAnswer = 'no';
           break;
         } else {
