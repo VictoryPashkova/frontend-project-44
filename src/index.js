@@ -63,7 +63,7 @@ const theGame = (gameName, name) => {
         correctAnswer = String(hiddenNumber);
 
       } else if (gameName === 'prime') {
-        question = randomNumberOne;
+        question = 'Question: ' + randomNumberOne;
         let value = false;
 
         for (let i = 2; i < randomNumberOne; i += 1) {
