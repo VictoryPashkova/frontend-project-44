@@ -1,13 +1,26 @@
-import readlineSync from 'readline-sync';
-import { gamesNameRules, theGame } from '../index.js';
+import { randomOne } from '../utils.js';
 
-const prime = () => {
-  console.log('Welcome to the Brain Games!');
-  const name = readlineSync.question('May I have your name?: ');
-  console.log(`Hello, ${name}!`);
+const primeGame = () => {
+  const randomNumberOne = randomOne();
+  let correctAnswer = '';
+  let questionUser = '';
 
-  gamesNameRules('prime');
-  theGame('prime', name);
+  questionUser = `Question: ${randomNumberOne}`;
+
+  for (let j = 2; j < randomNumberOne; j += 1) {
+    if (randomNumberOne % j === 0) {
+      correctAnswer = 'no';
+      break;
+    } else {
+      correctAnswer = 'yes';
+    }
+  }
+
+  const getRoundData = [questionUser, correctAnswer];
+
+  return getRoundData;
 };
 
-export default prime;
+const primeDescription = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+
+export { primeGame, primeDescription };

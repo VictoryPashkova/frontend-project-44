@@ -1,14 +1,29 @@
-import readlineSync from 'readline-sync';
-import { gamesNameRules, theGame } from '../index.js';
+import _ from 'lodash';
+import { randomOne, randomTwo } from '../utils.js';
 
-const calc = () => {
-  console.log('Welcome to the Brain Games!');
-  const name = readlineSync.question('May I have your name?: ');
-  console.log(`Hello, ${name}!`);
+const calcGame = () => {
+  const randomNumberOne = randomOne();
+  const randomNumberTwo = randomTwo();
+  const operatorArr = ['+', '-', '*'];
+  const randomOperatop = _.sample(operatorArr);
+  let correctAnswer = '';
+  let questionUser = '';
 
-  gamesNameRules('calc');
+  questionUser = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
 
-  theGame('calc', name);
+  if (randomOperatop === '+') {
+    correctAnswer = String(randomNumberOne + randomNumberTwo);
+  } else if (randomOperatop === '-') {
+    correctAnswer = String(randomNumberOne - randomNumberTwo);
+  } else if (randomOperatop === '*') {
+    correctAnswer = String(randomNumberOne * randomNumberTwo);
+  }
+
+  const getRoundData = [questionUser, correctAnswer];
+
+  return getRoundData;
 };
 
-export default calc;
+const calcDescription = 'What is the result of the expression?';
+
+export { calcGame, calcDescription };

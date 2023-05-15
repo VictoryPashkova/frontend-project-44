@@ -1,13 +1,27 @@
-import readlineSync from 'readline-sync';
-import { gamesNameRules, theGame } from '../index.js';
+import { randomOne, randomTwo } from '../utils.js';
 
-const gcd = () => {
-  console.log('Welcome to the Brain Games!');
-  const name = readlineSync.question('May I have your name?: ');
-  console.log(`Hello, ${name}!`);
+const gcdGame = () => {
+  let randomNumberOne = randomOne();
+  let randomNumberTwo = randomTwo();
+  let correctAnswer = '';
+  let questionUser = '';
 
-  gamesNameRules('gcd');
-  theGame('gcd', name);
+  questionUser = `Question: ${randomNumberOne} ${randomNumberTwo}`;
+
+  while (randomNumberOne !== 0 && randomNumberTwo !== 0) {
+    if (randomNumberOne > randomNumberTwo) {
+      randomNumberOne %= randomNumberTwo;
+    } else {
+      randomNumberTwo %= randomNumberOne;
+    }
+    correctAnswer = String(randomNumberOne + randomNumberTwo);
+  }
+
+  const getRoundData = [questionUser, correctAnswer];
+
+  return getRoundData;
 };
 
-export default gcd;
+const gcdDescription = 'Find the greatest common divisor of given numbers.';
+
+export { gcdGame, gcdDescription };
