@@ -1,6 +1,5 @@
 import readlineSync from 'readline-sync';
 
-// eslint-disable-next-line consistent-return
 const game = (description, gameName) => {
   console.log('Welcome to the Brain Games!');
   const name = readlineSync.question('May I have your name?: ');
@@ -20,7 +19,8 @@ const game = (description, gameName) => {
     } else {
       wrongAnswerText = `'${userAnswer}' is wrong answer. Correct answer was '${correctAnswer}'`;
       console.log(wrongAnswerText);
-      return `Let's try again, ${name}!`;
+      console.log(`Let's try again, ${name}!`);
+      return;
     }
   }
   console.log(`Congratulations, ${name}!`);
