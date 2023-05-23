@@ -1,23 +1,27 @@
-import _ from 'lodash';
-import { randomOne, randomTwo } from '../utils.js';
+import random from '../utils.js';
+
+const calc = (numberOne, numberTwo, operatop) => {
+  let correctAnswer = '';
+
+  if (operatop === '+') {
+    correctAnswer = String(numberOne + numberTwo);
+  } else if (operatop === '-') {
+    correctAnswer = String(numberOne - numberTwo);
+  } else if (operatop === '*') {
+    correctAnswer = String(numberOne * numberTwo);
+  }
+
+  return correctAnswer;
+};
 
 const calcGame = () => {
-  const randomNumberOne = randomOne();
-  const randomNumberTwo = randomTwo();
+  const randomNumberOne = random(50, 15);
+  const randomNumberTwo = random(15, 1);
   const operatorArr = ['+', '-', '*'];
-  const randomOperatop = _.sample(operatorArr);
-  let correctAnswer = '';
-  let questionUser = '';
+  const randomOperatop = operatorArr[random(2, 0)];
 
-  questionUser = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
-
-  if (randomOperatop === '+') {
-    correctAnswer = String(randomNumberOne + randomNumberTwo);
-  } else if (randomOperatop === '-') {
-    correctAnswer = String(randomNumberOne - randomNumberTwo);
-  } else if (randomOperatop === '*') {
-    correctAnswer = String(randomNumberOne * randomNumberTwo);
-  }
+  const questionUser = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
+  const correctAnswer = calc(randomNumberOne, randomNumberTwo, randomOperatop);
 
   const getRoundData = [questionUser, correctAnswer];
 
@@ -26,4 +30,4 @@ const calcGame = () => {
 
 const calcDescription = 'What is the result of the expression?';
 
-export { calcGame, calcDescription };
+export { calcGame, calcDescription, calc };

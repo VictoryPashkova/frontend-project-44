@@ -1,13 +1,8 @@
 // генератор случайных чисел
 
-const randomOne = () => {
-  const randomNumberOne = Math.floor(Math.random() * (50 - 15)) + 15;
+const random = (min = 50, max = 2) => {
+  const randomNumberOne = Math.floor(Math.random() * (max - min)) + min;
   return randomNumberOne;
 };
 
-const randomTwo = () => {
-  const randomNumberTwo = Math.floor(Math.random() * (50 - 15)) + 15;
-  return randomNumberTwo;
-};
-
-export { randomOne, randomTwo };
+export default random;
