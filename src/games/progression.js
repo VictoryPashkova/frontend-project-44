@@ -1,39 +1,40 @@
 import random from '../utils.js';
+import runGameLogic from '../index.js';
+
+const progressionDescription = 'What number is missing in the progression?';
 
 const getProgression = (start, step, length) => {
-  const arrProg = [];
+  const progresstion = [];
+  let firstNumber = start;
 
   for (let k = 0; k < length; k += 1) {
-    // eslint-disable-next-line no-param-reassign
-    start += step;
-    arrProg.push(start);
+    firstNumber += step;
+    progresstion.push(firstNumber);
   }
-  return arrProg;
+  return progresstion;
 };
 
-const progressionGame = () => {
-  let correctAnswer = '';
-  let questionUser = '';
-  let hiddenNumber = 0;
+const getProgresstionData = () => {
+  const maxCommonValue = 10;
+  const minCommonValue = 5;
+  const randomLength = random(maxCommonValue, minCommonValue);
+  const randomStep = random(maxCommonValue, minCommonValue);
+  const randomFirstNumber = random(maxCommonValue, minCommonValue);
 
-  const randomLength = random(10, 5);
-  const randomStep = random(10, 2);
-  const randomFirstNumber = random(10, 2);
+  const progresstion = getProgression(randomFirstNumber, randomStep, randomLength);
+  const randomIndex = random(progresstion.length, 0);
 
-  const arrProg = getProgression(randomFirstNumber, randomStep, randomLength);
-  const randomIndex = random(arrProg.length, 0);
+  const hiddenNumber = progresstion[randomIndex];
+  progresstion[randomIndex] = '..';
 
-  hiddenNumber = arrProg[randomIndex];
-  arrProg[randomIndex] = '..';
-
-  questionUser = `Question: ${arrProg.join(' ')}`;
-  correctAnswer = String(hiddenNumber);
+  const questionUser = `Question: ${progresstion.join(' ')}`;
+  const correctAnswer = String(hiddenNumber);
 
   const getRoundData = [questionUser, correctAnswer];
 
   return getRoundData;
 };
 
-const progressionDescription = 'What number is missing in the progression?';
+const runProgresstionGame = () => runGameLogic(progressionDescription, getProgresstionData);
 
-export { progressionGame, progressionDescription, getProgression };
+export default runProgresstionGame;

@@ -1,33 +1,34 @@
 import random from '../utils.js';
+import runGameLogic from '../index.js';
 
-const gcdCalc = (numberOne, numberTwo) => {
-  let correctAnswer = '';
+const gcdDescription = 'Find the greatest common divisor of given numbers.';
 
-  while (numberOne !== 0 && numberTwo !== 0) {
-    if (numberOne > numberTwo) {
-      // eslint-disable-next-line no-param-reassign
-      numberOne %= numberTwo;
+const getGcd = (numberOne, numberTwo) => {
+  let firstNumber = numberOne;
+  let secondNumber = numberTwo;
+
+  while (firstNumber !== 0 && secondNumber !== 0) {
+    if (firstNumber > secondNumber) {
+      firstNumber %= secondNumber;
     } else {
-      // eslint-disable-next-line no-param-reassign
-      numberTwo %= numberOne;
+      secondNumber %= firstNumber;
     }
-    correctAnswer = String(numberOne + numberTwo);
   }
-  return correctAnswer;
+  return String(firstNumber + secondNumber);
 };
 
-const gcdGame = () => {
+const getGcdData = () => {
   const randomNumberOne = random();
   const randomNumberTwo = random();
 
   const questionUser = `Question: ${randomNumberOne} ${randomNumberTwo}`;
-  const correctAnswer = gcdCalc(randomNumberOne, randomNumberTwo);
+  const correctAnswer = getGcd(randomNumberOne, randomNumberTwo);
 
   const getRoundData = [questionUser, correctAnswer];
 
   return getRoundData;
 };
 
-const gcdDescription = 'Find the greatest common divisor of given numbers.';
+const runGcdGame = () => runGameLogic(gcdDescription, getGcdData);
 
-export { gcdGame, gcdDescription, gcdCalc };
+export default runGcdGame;

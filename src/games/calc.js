@@ -1,33 +1,40 @@
 import random from '../utils.js';
+import runGameLogic from '../index.js';
 
-const calc = (numberOne, numberTwo, operatop) => {
-  let correctAnswer = '';
+const calcDescription = 'What is the result of the expression?';
 
-  if (operatop === '+') {
-    correctAnswer = String(numberOne + numberTwo);
-  } else if (operatop === '-') {
-    correctAnswer = String(numberOne - numberTwo);
-  } else if (operatop === '*') {
-    correctAnswer = String(numberOne * numberTwo);
+const calculateExpresion = (numberOne, numberTwo, operatop) => {
+  switch (operatop) {
+    case '+':
+      return String(numberOne + numberTwo);
+    case '-':
+      return String(numberOne - numberTwo);
+    case '*':
+      return String(numberOne * numberTwo);
+    default:
+      throw new Error(`Unknown operator: '${operatop}'!`);
   }
-
-  return correctAnswer;
 };
 
-const calcGame = () => {
-  const randomNumberOne = random(50, 15);
-  const randomNumberTwo = random(15, 1);
-  const operatorArr = ['+', '-', '*'];
-  const randomOperatop = operatorArr[random(2, 0)];
+const getCalcData = () => {
+  const minRandomDigit = 1;
+  const middleRandomDigit = 15;
+  const maxRandomDigit = 50;
+  const randomNumberOne = random(maxRandomDigit, middleRandomDigit);
+  const randomNumberTwo = random(middleRandomDigit, minRandomDigit);
+  const operatorArr = ['-', '*', '+'];
+  const maxLengthArr = 3;
+  const minLengthArr = 0;
+  const randomOperatop = operatorArr[random(maxLengthArr, minLengthArr)];
 
   const questionUser = `Question: ${randomNumberOne} ${randomOperatop} ${randomNumberTwo}`;
-  const correctAnswer = calc(randomNumberOne, randomNumberTwo, randomOperatop);
+  const correctAnswer = calculateExpresion(randomNumberOne, randomNumberTwo, randomOperatop);
 
   const getRoundData = [questionUser, correctAnswer];
 
   return getRoundData;
 };
 
-const calcDescription = 'What is the result of the expression?';
+const runCalcGame = () => runGameLogic(calcDescription, getCalcData);
 
-export { calcGame, calcDescription, calc };
+export default runCalcGame;

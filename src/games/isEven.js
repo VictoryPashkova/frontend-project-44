@@ -1,28 +1,23 @@
 import random from '../utils.js';
+import runGameLogic from '../index.js';
 
-const isEven = (number) => {
-  let correctAnswer = '';
+const evenDescription = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-  if (number % 2 === 0) {
-    correctAnswer = 'yes';
-  } else if (number % 2 !== 0) {
-    correctAnswer = 'no';
-  }
+const isEven = (number) => number % 2 === 0;
 
-  return correctAnswer;
-};
-
-const isEvenGame = () => {
-  const randomNumberOne = random(1000, 50);
+const getEvenData = () => {
+  const minRandomDigit = 50;
+  const maxRandomDigit = 1000;
+  const randomNumberOne = random(maxRandomDigit, minRandomDigit);
 
   const questionUser = `Question: ${randomNumberOne}`;
-  const correctAnswer = isEven(randomNumberOne);
+  const correctAnswer = isEven(randomNumberOne) ? 'yes' : 'no';
 
   const getRoundData = [questionUser, correctAnswer];
 
   return getRoundData;
 };
 
-const isEvenDescription = 'Answer "yes" if the number is even, otherwise answer "no".';
+const runEvenGame = () => runGameLogic(evenDescription, getEvenData);
 
-export { isEvenGame, isEvenDescription, isEven };
+export default runEvenGame;
