@@ -1,7 +1,7 @@
-import random from '../utils.js';
+import getRandomNumber from '../utils.js';
 import runGameLogic from '../index.js';
 
-const gcdDescription = 'Find the greatest common divisor of given numbers.';
+const description = 'Find the greatest common divisor of given numbers.';
 
 const getGcd = (numberOne, numberTwo) => {
   let firstNumber = numberOne;
@@ -14,21 +14,21 @@ const getGcd = (numberOne, numberTwo) => {
       secondNumber %= firstNumber;
     }
   }
-  return String(firstNumber + secondNumber);
+  return firstNumber + secondNumber;
 };
 
 const getGcdData = () => {
-  const randomNumberOne = random();
-  const randomNumberTwo = random();
+  const randomNumberOne = getRandomNumber();
+  const randomNumberTwo = getRandomNumber();
 
-  const questionUser = `Question: ${randomNumberOne} ${randomNumberTwo}`;
-  const correctAnswer = getGcd(randomNumberOne, randomNumberTwo);
+  const dataForQuestion = `${randomNumberOne} ${randomNumberTwo}`;
+  const correctAnswer = String(getGcd(randomNumberOne, randomNumberTwo));
 
-  const getRoundData = [questionUser, correctAnswer];
+  const getRoundData = [dataForQuestion, correctAnswer];
 
   return getRoundData;
 };
 
-const runGcdGame = () => runGameLogic(gcdDescription, getGcdData);
+const runGcdGame = () => runGameLogic(description, getGcdData);
 
 export default runGcdGame;

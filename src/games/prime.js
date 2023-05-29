@@ -1,11 +1,14 @@
-import random from '../utils.js';
+import getRandomNumber from '../utils.js';
 import runGameLogic from '../index.js';
 
-const primeDescription = 'Answer "yes" if given number is prime. Otherwise answer "no".';
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
 const isPrime = (number) => {
-  for (let j = 2; j < number; j += 1) {
-    if (number % j === 0) {
+  if (number < 2) {
+    return false;
+  }
+  for (let index = 2; index <= number; index += 1) {
+    if (number % index === 0) {
       return false;
     }
   }
@@ -15,15 +18,15 @@ const isPrime = (number) => {
 const getPrimeData = () => {
   const minRandomDigit = 2;
   const maxRandomDigit = 200;
-  const randomNumberOne = random(maxRandomDigit, minRandomDigit);
+  const randomNumberOne = getRandomNumber(maxRandomDigit, minRandomDigit);
 
-  const questionUser = `Question: ${randomNumberOne}`;
+  const dataForQuestion = `${randomNumberOne}`;
   const correctAnswer = isPrime(randomNumberOne) ? 'yes' : 'no';
-  const getRoundData = [questionUser, correctAnswer];
+  const getRoundData = [dataForQuestion, correctAnswer];
 
   return getRoundData;
 };
 
-const runPrimeGame = () => runGameLogic(primeDescription, getPrimeData);
+const runPrimeGame = () => runGameLogic(description, getPrimeData);
 
 export default runPrimeGame;

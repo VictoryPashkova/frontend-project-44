@@ -1,40 +1,40 @@
-import random from '../utils.js';
+import getRandomNumber from '../utils.js';
 import runGameLogic from '../index.js';
 
-const progressionDescription = 'What number is missing in the progression?';
+const description = 'What number is missing in the progression?';
 
 const getProgression = (start, step, length) => {
   const progresstion = [];
   let firstNumber = start;
 
-  for (let k = 0; k < length; k += 1) {
+  for (let index = 0; index < length; index += 1) {
     firstNumber += step;
     progresstion.push(firstNumber);
   }
   return progresstion;
 };
 
-const getProgresstionData = () => {
+const getProgressionData = () => {
   const maxCommonValue = 10;
   const minCommonValue = 5;
-  const randomLength = random(maxCommonValue, minCommonValue);
-  const randomStep = random(maxCommonValue, minCommonValue);
-  const randomFirstNumber = random(maxCommonValue, minCommonValue);
+  const randomLength = getRandomNumber(maxCommonValue, minCommonValue);
+  const randomStep = getRandomNumber(maxCommonValue, minCommonValue);
+  const randomFirstNumber = getRandomNumber(maxCommonValue, minCommonValue);
 
-  const progresstion = getProgression(randomFirstNumber, randomStep, randomLength);
-  const randomIndex = random(progresstion.length, 0);
+  const progression = getProgression(randomFirstNumber, randomStep, randomLength);
+  const randomIndex = getRandomNumber(progression.length, 0);
 
-  const hiddenNumber = progresstion[randomIndex];
-  progresstion[randomIndex] = '..';
+  const hiddenNumber = progression[randomIndex];
+  progression[randomIndex] = '..';
 
-  const questionUser = `Question: ${progresstion.join(' ')}`;
+  const dataForQuestion = `${progression.join(' ')}`;
   const correctAnswer = String(hiddenNumber);
 
-  const getRoundData = [questionUser, correctAnswer];
+  const getRoundData = [dataForQuestion, correctAnswer];
 
   return getRoundData;
 };
 
-const runProgresstionGame = () => runGameLogic(progressionDescription, getProgresstionData);
+const runProgressionGame = () => runGameLogic(description, getProgressionData);
 
-export default runProgresstionGame;
+export default runProgressionGame;
